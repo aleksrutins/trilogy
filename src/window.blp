@@ -1,0 +1,70 @@
+using Gtk 4.0;
+using Adw 1;
+
+template TrilogyWindow : Adw.ApplicationWindow {
+  default-width: 600;
+  default-height: 300;
+
+  title: "Trilogy";
+
+  Adw.Leaflet leaflet {
+    Box {
+      orientation: vertical;
+
+      Adw.HeaderBar left_header_bar {
+        show-end-title-buttons: bind leaflet.folded;
+        title-widget: Adw.WindowTitle { title: "Connections"; };
+      }
+
+      ListView {
+        styles ["navigation-sidebar"]
+      }
+    }
+
+    Adw.LeafletPage {
+      navigatable: false;
+      child: Separator {};
+    }
+
+    Box {
+      orientation: vertical;
+      hexpand: true;
+      Adw.HeaderBar header_bar {
+        show-start-title-buttons: bind leaflet.folded;
+        [end]
+        MenuButton {
+          icon-name: "open-menu-symbolic";
+          menu-model: primary_menu;
+        }
+      }
+
+      Label label {
+        label: "Hello, World!";
+        vexpand: true;
+
+        styles [
+          "title-1",
+        ]
+      }
+    }
+  }
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("_Preferences");
+      action: "app.preferences";
+    }
+
+    item {
+      label: _("_Keyboard Shortcuts");
+      action: "win.show-help-overlay";
+    }
+
+    item {
+      label: _("_About Trilogy");
+      action: "app.about";
+    }
+  }
+}

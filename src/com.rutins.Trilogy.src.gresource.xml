@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/rutins/Trilogy/js">
+    <file>main.js</file>
+    <file>window.js</file>
+    <file>connection.js</file>
+    <file>connectionPreview.js</file>
+  </gresource>
+</gresources>
