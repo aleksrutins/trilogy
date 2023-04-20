@@ -1,0 +1,47 @@
+using Gtk 4.0;
+using Adw 1;
+
+template TrilogyAddConnectionDialog : Adw.Window {
+  title: "Add Connection";
+  Box {
+    orientation: vertical;
+    Adw.HeaderBar {
+      show-end-title-buttons: false;
+      show-start-title-buttons: false;
+
+      [start]
+      Button {
+        label: "Cancel";
+        clicked => cancelClicked();
+      }
+
+      [end]
+      Button {
+        styles ["suggested-action"]
+        label: "Add";
+        sensitive: bind TrilogyAddConnectionDialog.valid;
+        clicked => addClicked();
+      }
+    }
+
+    Box {
+      hexpand: false;
+      orientation: vertical;
+      spacing: 6;
+      margin-top: 10;
+      margin-bottom: 10;
+      margin-start: 10;
+      margin-end: 10;
+
+      Entry nameEntry {
+        placeholder-text: "Name";
+        changed => validateInput();
+      }
+
+      Entry urlEntry {
+        placeholder-text: "Connection URL";
+        changed => validateInput();
+      }
+    }
+  }
+}

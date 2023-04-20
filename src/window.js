@@ -23,20 +23,43 @@ import Gtk from 'gi://Gtk';
 import Adw from 'gi://Adw';
 import Kaste from 'gi://Kaste';
 
-export const TrilogyWindow = GObject.registerClass({
-    GTypeName: 'TrilogyWindow',
-    Template: 'resource:///com/rutins/Trilogy/window.ui',
-    Properties: {
+import { Connection } from './connection.js';
+import { ConnectionPreview } from './connectionPreview.js';
+import { AddConnectionDialog } from './addConnectionDialog.js';
 
-    },
-    InternalChildren: ['label'],
-}, class TrilogyWindow extends Adw.ApplicationWindow {
+export class TrilogyWindow extends Adw.ApplicationWindow {
+    bucket = Kaste.Bucket.new('com.rutins.Trilogy.connections', false);
+
     constructor(application) {
         super({ application });
-
-        const bucket = Kaste.Bucket.new('com.rutins.Trilogy.connections', false);
-        const contents = bucket.list_contents();
-        console.log(contents.next_file(null).get_name());
+        this.reloadConnections();
     }
-});
 
+    static {
+        GObject.registerClass({
+            GTypeName: 'TrilogyWindow',
+            Template: 'resource:///com/rutins/Trilogy/window.ui',
+            InternalChildren: ['connections_list']
+        }, this);
+    }
+
+    reloadConnections() {
+        const contents = this.bucket.list_contents();
+        let item;
+        while((item = contents.next_file(null)) != null) {
+            const name = item.get_name();
+            const data = this.bucket.read(Connection.$gtype, name);
+            const preview = new ConnectionPreview(data);
+            this._connections_list.append(preview);
+        }
+    }
+
+    addConnection() {
+        const dlg = new AddConnectionDialog(this);
+        dlg.connect('add-connection', (_, conn) => {
+            this.bucket.write(conn.name, conn);
+            this.reloadConnections();
+        });
+        dlg.present();
+    }
+}

@@ -3,6 +3,8 @@
   <gresource prefix="/com/rutins/Trilogy">
     <file preprocess="xml-stripblanks">window.ui</file>
     <file preprocess="xml-stripblanks">connectionPreview.ui</file>
+    <file preprocess="xml-stripblanks">addConnectionDialog.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
+    <file preprocess="xml-stripblanks">icons/plus-large-symbolic.svg</file>
   </gresource>
 </gresources>
