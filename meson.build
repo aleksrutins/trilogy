@@ -1,4 +1,4 @@
-project('trilogy',
+project('trilogy', ['c', 'vala'],
           version: '0.1.0',
     meson_version: '>= 0.62.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
@@ -11,6 +11,7 @@ dependency('kaste-0.1')
 dependency('spectrum-0.1')
 
 subdir('data')
+subdir('libtlg')
 subdir('src')
 subdir('po')
 

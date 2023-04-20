@@ -1,10 +1,24 @@
 using Gtk 4.0;
 using Adw 1;
 
-template TrilogyConnectionPreview : Gtk.Box {
-  orientation: vertical;
+template TrilogyConnectionPreview : Gtk.Button {
+  styles ["card"]
 
-  Label {
-    label: bind TrilogyConnectionPreview.connection.name;
+  Box {
+    spacing: 5;
+    margin-top: 5;
+    margin-bottom: 5;
+    margin-start: 5;
+    margin-end: 5;
+    orientation: vertical;
+
+    Label {
+      styles ["title-4"]
+      label: bind TrilogyConnectionPreview.connection.name;
+    }
+
+    Label {
+      label: bind TrilogyConnectionPreview.connection.prettyType;
+    }
   }
 }

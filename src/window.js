@@ -44,6 +44,10 @@ export class TrilogyWindow extends Adw.ApplicationWindow {
     }
 
     reloadConnections() {
+        let preview;
+        while((preview = this._connections_list.get_first_child()) != null)
+            this._connections_list.remove(preview);
+
         const contents = this.bucket.list_contents();
         let item;
         while((item = contents.next_file(null)) != null) {

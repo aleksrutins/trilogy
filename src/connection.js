@@ -1,4 +1,7 @@
 import GObject from 'gi://GObject'
+import Json from 'gi://Json'
+
+import Tlg from 'gi://Tlg'
 
 export class Connection extends GObject.Object {
     static {
@@ -17,8 +20,16 @@ export class Connection extends GObject.Object {
                     'The URL of the connection',
                     GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
                     null
+                ),
+                'prettyType': GObject.ParamSpec.string(
+                    'prettyType',
+                    'Pretty Type',
+                    'The human-readable database type',
+                    GObject.ParamFlags.READABLE,
+                    null
                 )
-            }
+            },
+            Implements: [Json.Serializable]
         }, this);
     }
 
@@ -40,10 +51,18 @@ export class Connection extends GObject.Object {
         if(this._url == newURL) return;
         this._url = newURL;
         this.notify('url');
+        this.notify('prettyType');
     }
 
     get prettyType() {
         const method = this._url.split('://')[0];
-        return (method == 'postgres' ? 'PostgreSQL' : 'Unknown Type');
+        return (method == 'postgresql' ? 'PostgreSQL' : 'Unknown Type');
+    }
+
+    vfunc_find_property(name) {
+        if(['prettyType'].includes(name)) return null;
+        else {
+            return Tlg.reflect_find_type_property(Connection, name);
+        }
     }
 }

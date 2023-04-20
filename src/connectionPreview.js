@@ -2,7 +2,7 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import { Connection } from './connection.js';
 
-export class ConnectionPreview extends Gtk.Box {
+export class ConnectionPreview extends Gtk.Button {
     static {
         GObject.registerClass({
             GTypeName: "TrilogyConnectionPreview",
@@ -19,7 +19,21 @@ export class ConnectionPreview extends Gtk.Box {
         }, this)
     }
 
+    get connection() {
+        return this._connection ?? null;
+    }
+
+    set connection(conn) {
+        if(this._connection == conn) return;
+        this._connection = conn;
+        this.notify('connection');
+    }
+
     constructor(conn) {
         super({ 'connection': conn });
+    }
+
+    on_clicked() {
+        console.log('Connection selected: ' + this.connection.name);
     }
 }
