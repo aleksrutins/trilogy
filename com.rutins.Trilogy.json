@@ -35,6 +35,16 @@
             ]
         },
         {
+            "name" : "kaste",
+            "buildsystem": "meson",
+            "sources" : [
+                {
+                    "type": "git",
+                    "url": "https://github.com/aleksrutins/kaste"
+                }
+	    ]
+	},
+        {
             "name" : "spectrum",
             "buildsystem" : "meson",
             "sources" : [

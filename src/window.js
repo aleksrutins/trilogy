@@ -21,6 +21,7 @@
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import Adw from 'gi://Adw';
+import Kaste from 'gi://Kaste';
 
 export const TrilogyWindow = GObject.registerClass({
     GTypeName: 'TrilogyWindow',
@@ -32,6 +33,10 @@ export const TrilogyWindow = GObject.registerClass({
 }, class TrilogyWindow extends Adw.ApplicationWindow {
     constructor(application) {
         super({ application });
+
+        const bucket = Kaste.Bucket.new('com.rutins.Trilogy.connections', false);
+        const contents = bucket.list_contents();
+        console.log(contents.next_file(null).get_name());
     }
 });
 

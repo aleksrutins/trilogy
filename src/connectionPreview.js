@@ -10,7 +10,7 @@ export class ConnectionPreview extends GObject.Object {
                     'connection',
                     'Connection',
                     'The connection to preview',
-                    Connection,
+                    Connection.$gtype,
                     GObject.ParamFlags.READWRITE
                 )
             },
@@ -19,7 +19,6 @@ export class ConnectionPreview extends GObject.Object {
     }
 
     constructor(conn) {
-        super();
-        this._connection = conn;
+        super({ 'connection': conn });
     }
 }
