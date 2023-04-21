@@ -49,7 +49,7 @@ export class AddConnectionDialog extends Adw.Window {
     }
 
     addClicked() {
-        this.emit('add-connection', Tlg.Connection.new({
+        this.emit('add-connection', new Tlg.Connection({
             name: this._nameEntry.get_text(),
             url: this._urlEntry.get_text()
         }));

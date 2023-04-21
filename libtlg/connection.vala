@@ -2,10 +2,19 @@ using Postgres;
 
 namespace Tlg {
     public class Connection : Object, Json.Serializable {
-        public unowned Database? db {get; construct set;}
+        public static Gee.HashMap<string, weak Database> connections = new Gee.HashMap<string, weak Database>();
+        public Database? db {
+            get {
+                return connections.@get(name);
+            }
+            set {
+                if(value != null) connections.@set(name, value);
+                else connections.unset(name);
+            }
+        }
         public bool connected {
             get {
-                return db != null;
+                return connections.has_key(name);
             }
         }
         public string name {get; construct set;}
