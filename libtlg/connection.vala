@@ -28,6 +28,12 @@ namespace Tlg {
             Object(db: null, name: name, url: url);
         }
 
+        construct {
+            notify.connect((pspec) => {
+                if(pspec.get_name() == "db") notify_property("connected");
+            });
+        }
+
         public unowned ParamSpec? find_property(string prop) {
             if(prop == "name" || prop == "url") return Tlg.Reflect.find_type_property(typeof(Connection), prop);
             else return null;

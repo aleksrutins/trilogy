@@ -28,16 +28,21 @@ template TrilogyWindow : Adw.ApplicationWindow {
         }
       }
 
-      Box connections_list {
-        styles ["navigation-sidebar"]
+      ScrolledWindow {
+        vexpand: true;
+        hexpand: true;
 
-        orientation: vertical;
-        spacing: 10;
+        Box connections_list {
+          styles ["navigation-sidebar"]
 
-        margin-top: 10;
-        margin-bottom: 10;
-        margin-start: 10;
-        margin-end: 10;
+          orientation: vertical;
+          spacing: 10;
+
+          margin-top: 10;
+          margin-bottom: 10;
+          margin-start: 10;
+          margin-end: 10;
+        }
       }
     }
 

@@ -5,31 +5,37 @@ template TrilogyConnectionPreview : Gtk.Button {
   styles ["card"]
 
   Box {
-    spacing: 5;
     margin-top: 5;
     margin-bottom: 5;
-    margin-start: 5;
-    margin-end: 5;
+    margin-start: 10;
+    margin-end: 10;
     orientation: horizontal;
-    halign: center;
+    halign: fill;
     valign: center;
 
     Box {
       orientation: vertical;
       halign: start;
+      hexpand: true;
+
       Label {
         styles ["title-4"]
+        halign: start;
         label: bind TrilogyConnectionPreview.connection.name;
       }
 
       Label {
+        halign: start;
         label: bind TrilogyConnectionPreview.connection.prettyType;
       }
     }
 
     Image {
       styles ["success"]
+      hexpand: true;
+      halign: end;
       icon-name: 'circle-filled-symbolic';
+      visible: bind TrilogyConnectionPreview.connection.connected;
     }
   }
 }
