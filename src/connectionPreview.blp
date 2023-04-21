@@ -1,41 +1,37 @@
 using Gtk 4.0;
 using Adw 1;
 
-template TrilogyConnectionPreview : Gtk.Button {
-  styles ["card"]
+template TrilogyConnectionPreview : Gtk.Box {
+  margin-top: 5;
+  margin-bottom: 5;
+  margin-start: 10;
+  margin-end: 10;
+  orientation: horizontal;
+  halign: fill;
+  valign: center;
 
   Box {
-    margin-top: 5;
-    margin-bottom: 5;
-    margin-start: 10;
-    margin-end: 10;
-    orientation: horizontal;
-    halign: fill;
-    valign: center;
+    orientation: vertical;
+    halign: start;
+    hexpand: true;
 
-    Box {
-      orientation: vertical;
+    Label {
+      styles ["title-4"]
       halign: start;
-      hexpand: true;
-
-      Label {
-        styles ["title-4"]
-        halign: start;
-        label: bind TrilogyConnectionPreview.connection.name;
-      }
-
-      Label {
-        halign: start;
-        label: bind TrilogyConnectionPreview.connection.prettyType;
-      }
+      label: bind TrilogyConnectionPreview.connection.name;
     }
 
-    Image {
-      styles ["success"]
-      hexpand: true;
-      halign: end;
-      icon-name: 'circle-filled-symbolic';
-      visible: bind TrilogyConnectionPreview.connection.connected;
+    Label {
+      halign: start;
+      label: bind TrilogyConnectionPreview.connection.prettyType;
     }
+  }
+
+  Image {
+    styles ["success"]
+    hexpand: true;
+    halign: end;
+    icon-name: 'circle-filled-symbolic';
+    visible: bind TrilogyConnectionPreview.connection.connected;
   }
 }

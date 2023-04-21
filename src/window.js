@@ -55,10 +55,6 @@ export class TrilogyWindow extends Adw.ApplicationWindow {
             const name = item.get_name();
             const data = this.bucket.read(Tlg.Connection, name);
             const preview = new ConnectionPreview(data);
-            preview.connect('selected', (_, conn) => {
-                this._view_stack.set_visible_child_name('connection');
-                this._conn_view.connection = conn;
-            });
             this._connections_list.append(preview);
         }
     }
@@ -70,5 +66,16 @@ export class TrilogyWindow extends Adw.ApplicationWindow {
             this.reloadConnections();
         });
         dlg.present();
+    }
+
+    navigate(list, row, data) {
+        if(row != null) {
+            const conn = row.get_child().connection;
+            this._view_stack.set_visible_child_name('connection');
+            this._conn_view.connection = conn;
+        } else {
+            this._conn_view.connection = null;
+            this._view_stack.set_visible_child_name('welcome');
+        }
     }
 }

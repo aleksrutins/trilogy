@@ -2,7 +2,7 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import Tlg from 'gi://Tlg';
 
-export class ConnectionPreview extends Gtk.Button {
+export class ConnectionPreview extends Gtk.Box {
     static {
         GObject.registerClass({
             GTypeName: "TrilogyConnectionPreview",
