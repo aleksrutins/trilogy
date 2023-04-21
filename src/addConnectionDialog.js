@@ -25,7 +25,7 @@ export class AddConnectionDialog extends Adw.Window {
             },
             Signals: {
                 'add-connection': {
-                    param_types: [Connection.$gtype]
+                    param_types: [Connection]
                 }
             },
             Template:  "resource:///com/rutins/Trilogy/addConnectionDialog.ui",

@@ -10,15 +10,26 @@ template TrilogyConnectionPreview : Gtk.Button {
     margin-bottom: 5;
     margin-start: 5;
     margin-end: 5;
-    orientation: vertical;
+    orientation: horizontal;
+    halign: center;
+    valign: center;
 
-    Label {
-      styles ["title-4"]
-      label: bind TrilogyConnectionPreview.connection.name;
+    Box {
+      orientation: vertical;
+      halign: start;
+      Label {
+        styles ["title-4"]
+        label: bind TrilogyConnectionPreview.connection.name;
+      }
+
+      Label {
+        label: bind TrilogyConnectionPreview.connection.prettyType;
+      }
     }
 
-    Label {
-      label: bind TrilogyConnectionPreview.connection.prettyType;
+    Image {
+      styles ["success"]
+      icon-name: 'circle-filled-symbolic';
     }
   }
 }

@@ -12,8 +12,13 @@ export class ConnectionPreview extends Gtk.Button {
                     'Connection',
                     'The connection to preview',
                     GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
-                    Connection.$gtype
+                    Connection
                 )
+            },
+            Signals: {
+                'selected': {
+                    param_types: [Connection]
+                }
             },
             Template: "resource:///com/rutins/Trilogy/connectionPreview.ui"
         }, this)
@@ -34,6 +39,6 @@ export class ConnectionPreview extends Gtk.Button {
     }
 
     on_clicked() {
-        console.log('Connection selected: ' + this.connection.name);
+        this.emit('selected', this.connection);
     }
 }

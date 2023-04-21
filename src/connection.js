@@ -27,6 +27,13 @@ export class Connection extends GObject.Object {
                     'The human-readable database type',
                     GObject.ParamFlags.READABLE,
                     null
+                ),
+                'connected': GObject.ParamSpec.boolean(
+                    'connected',
+                    'Connected',
+                    'Whether or not this connection is active',
+                    GObject.ParamFlags.READWRITE,
+                    false
                 )
             },
             Implements: [Json.Serializable]
@@ -60,7 +67,7 @@ export class Connection extends GObject.Object {
     }
 
     vfunc_find_property(name) {
-        if(['prettyType'].includes(name)) return null;
+        if(['prettyType', 'connected'].includes(name)) return null;
         else {
             return Tlg.reflect_find_type_property(Connection, name);
         }

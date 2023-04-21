@@ -39,7 +39,7 @@ export class TrilogyWindow extends Adw.ApplicationWindow {
         GObject.registerClass({
             GTypeName: 'TrilogyWindow',
             Template: 'resource:///com/rutins/Trilogy/window.ui',
-            InternalChildren: ['connections_list']
+            InternalChildren: ['connections_list', 'view_stack']
         }, this);
     }
 
