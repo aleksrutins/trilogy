@@ -22,8 +22,8 @@ import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 import Adw from 'gi://Adw';
 import Kaste from 'gi://Kaste';
+import Tlg from 'gi://Tlg';
 
-import { Connection } from './connection.js';
 import { ConnectionPreview } from './connectionPreview.js';
 import { ConnectionView } from './connectionView.js';
 import { AddConnectionDialog } from './addConnectionDialog.js';
@@ -40,7 +40,7 @@ export class TrilogyWindow extends Adw.ApplicationWindow {
         GObject.registerClass({
             GTypeName: 'TrilogyWindow',
             Template: 'resource:///com/rutins/Trilogy/window.ui',
-            InternalChildren: ['connections_list', 'view_stack']
+            InternalChildren: ['connections_list', 'view_stack', 'conn_view']
         }, this);
     }
 
@@ -53,11 +53,11 @@ export class TrilogyWindow extends Adw.ApplicationWindow {
         let item;
         while((item = contents.next_file(null)) != null) {
             const name = item.get_name();
-            const data = this.bucket.read(Connection.$gtype, name);
+            const data = this.bucket.read(Tlg.Connection, name);
             const preview = new ConnectionPreview(data);
             preview.connect('selected', (_, conn) => {
                 this._view_stack.set_visible_child_name('connection');
-                //this._conn_view.connection = conn;
+                this._conn_view.connection = conn;
             });
             this._connections_list.append(preview);
         }

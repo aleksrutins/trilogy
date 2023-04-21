@@ -1,6 +1,6 @@
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
-import { Connection } from './connection.js';
+import Tlg from 'gi://Tlg';
 
 export class ConnectionPreview extends Gtk.Button {
     static {
@@ -12,12 +12,12 @@ export class ConnectionPreview extends Gtk.Button {
                     'Connection',
                     'The connection to preview',
                     GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
-                    Connection
+                    Tlg.Connection
                 )
             },
             Signals: {
                 'selected': {
-                    param_types: [Connection]
+                    param_types: [Tlg.Connection]
                 }
             },
             Template: "resource:///com/rutins/Trilogy/connectionPreview.ui"

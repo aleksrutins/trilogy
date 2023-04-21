@@ -1,8 +1,7 @@
 import GObject from "gi://GObject";
 import Gtk from "gi://Gtk";
 import Adw from "gi://Adw";
-
-import { Connection } from './connection.js';
+import Tlg from 'gi://Tlg';
 
 export class AddConnectionDialog extends Adw.Window {
     constructor(mainWindow) {
@@ -25,7 +24,7 @@ export class AddConnectionDialog extends Adw.Window {
             },
             Signals: {
                 'add-connection': {
-                    param_types: [Connection]
+                    param_types: [Tlg.Connection]
                 }
             },
             Template:  "resource:///com/rutins/Trilogy/addConnectionDialog.ui",
@@ -50,7 +49,7 @@ export class AddConnectionDialog extends Adw.Window {
     }
 
     addClicked() {
-        this.emit('add-connection', new Connection({
+        this.emit('add-connection', Tlg.Connection.new({
             name: this._nameEntry.get_text(),
             url: this._urlEntry.get_text()
         }));

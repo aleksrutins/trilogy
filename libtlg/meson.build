@@ -1,6 +1,7 @@
 api_version = '0.1'
 libtlg_srcs = [
-	'reflection.vala'
+	'reflection.vala',
+	'connection.vala'
 ]
 
 libtlg_deps = [
@@ -17,7 +18,8 @@ libtlg_lib = shared_library('tlg-' + api_version,
   vala_vapi: 'tlg-' + api_version + '.vapi',
   dependencies: libtlg_deps,
   install: true,
-  install_dir: [true, true, true, true]
+  install_dir: [true, true, true, true],
+  include_directories: include_directories('include')
 )
 
 g_ir_compiler = find_program('g-ir-compiler')

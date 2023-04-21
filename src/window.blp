@@ -79,9 +79,7 @@ template TrilogyWindow : Adw.ApplicationWindow {
         }
         Adw.ViewStackPage {
           name: 'connection';
-          child: .TrilogyConnectionView {
-            connection: null;
-          };
+          child: .TrilogyConnectionView conn_view {};
         }
       }
     }

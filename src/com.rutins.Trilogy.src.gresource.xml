@@ -3,7 +3,6 @@
   <gresource prefix="/com/rutins/Trilogy/js">
     <file>main.js</file>
     <file>window.js</file>
-    <file>connection.js</file>
     <file>connectionPreview.js</file>
     <file>connectionView.js</file>
     <file>addConnectionDialog.js</file>
