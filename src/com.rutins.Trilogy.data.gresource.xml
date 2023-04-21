@@ -5,7 +5,8 @@
     <file preprocess="xml-stripblanks">connectionPreview.ui</file>
     <file preprocess="xml-stripblanks">addConnectionDialog.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
-    <file preprocess="xml-stripblanks">icons/plus-large-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">icons/circle-filled-symbolic.svg</file>
+
+    <file preprocess="xml-stripblanks">icons/scalable/actions/plus-large-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/circle-filled-symbolic.svg</file>
   </gresource>
 </gresources>
