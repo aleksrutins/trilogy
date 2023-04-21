@@ -25,6 +25,7 @@ import Kaste from 'gi://Kaste';
 
 import { Connection } from './connection.js';
 import { ConnectionPreview } from './connectionPreview.js';
+import { ConnectionView } from './connectionView.js';
 import { AddConnectionDialog } from './addConnectionDialog.js';
 
 export class TrilogyWindow extends Adw.ApplicationWindow {
@@ -54,6 +55,10 @@ export class TrilogyWindow extends Adw.ApplicationWindow {
             const name = item.get_name();
             const data = this.bucket.read(Connection.$gtype, name);
             const preview = new ConnectionPreview(data);
+            preview.connect('selected', (_, conn) => {
+                this._view_stack.set_visible_child_name('connection');
+                //this._conn_view.connection = conn;
+            });
             this._connections_list.append(preview);
         }
     }

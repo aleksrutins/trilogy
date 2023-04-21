@@ -72,4 +72,8 @@ export class Connection extends GObject.Object {
             return Tlg.reflect_find_type_property(Connection, name);
         }
     }
+
+    connect() {
+
+    }
 }

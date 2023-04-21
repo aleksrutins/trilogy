@@ -7,7 +7,8 @@ libtlg_deps = [
   dependency('gio-2.0'),
   dependency('gobject-2.0'),
   dependency('glib-2.0'),
-  dependency('json-glib-1.0')
+  dependency('json-glib-1.0'),
+  dependency('libpq')
 ]
 
 libtlg_lib = shared_library('tlg-' + api_version,
