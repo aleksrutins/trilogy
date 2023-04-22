@@ -14,6 +14,13 @@ export class ConnectionView extends Gtk.Box {
                     GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
                     Tlg.Connection
                 ),
+                'show-start-title-buttons': GObject.ParamSpec.boolean(
+                    'show-start-title-buttons',
+                    'Show Start Title Buttons',
+                    'Whether the headerbar should show the start title buttons',
+                    GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+                    false
+                )
             },
             Template: 'resource:///com/rutins/Trilogy/connectionView.ui'
         }, this)
@@ -28,6 +35,16 @@ export class ConnectionView extends Gtk.Box {
         this._connection = conn;
         this.notify('connection');
         this.refreshConnection();
+    }
+
+    get show_start_title_buttons() {
+        return this._show_start_title_buttons ?? false;
+    }
+
+    set show_start_title_buttons(sstb) {
+        if(this._show_start_title_buttons == sstb) return;
+        this._show_start_title_buttons = sstb;
+        this.notify('show-start-title-buttons');
     }
 
     refreshConnection() {

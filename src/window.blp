@@ -48,9 +48,6 @@ template TrilogyWindow : Adw.ApplicationWindow {
     Box {
       orientation: vertical;
       hexpand: true;
-      Adw.HeaderBar header_bar {
-        show-start-title-buttons: bind leaflet.folded;
-      }
 
       Adw.ViewStack view_stack {
         Adw.ViewStackPage {
@@ -58,27 +55,44 @@ template TrilogyWindow : Adw.ApplicationWindow {
 
           child: Box {
             orientation: vertical;
-            margin-top: 10;
-            margin-bottom: 10;
-            margin-start: 30;
-            margin-end: 30;
-            halign: center;
-            valign: center;
+            halign: fill;
+            valign: fill;
             hexpand: true;
             vexpand: true;
 
-            Label {
-              styles ["title-1"]
-              label: "Welcome";
+            Adw.HeaderBar header_bar {
+              styles ["flat"]
+
+              show-start-title-buttons: bind leaflet.folded;
             }
-            Label {
-              label: "Select or create a connection from the left sidebar to get started.";
+
+            Box {
+              orientation: vertical;
+              margin-top: 10;
+              margin-bottom: 10;
+              margin-start: 30;
+              margin-end: 30;
+              halign: center;
+              valign: center;
+              hexpand: true;
+              vexpand: true;
+
+              Label {
+                styles ["title-1"]
+                label: "Welcome";
+              }
+
+              Label {
+                label: "Select or create a connection from the left sidebar to get started.";
+              }
             }
           };
         }
         Adw.ViewStackPage {
           name: 'connection';
-          child: .TrilogyConnectionView conn_view {};
+          child: .TrilogyConnectionView conn_view {
+            show-start-title-buttons: bind leaflet.folded;
+          };
         }
       }
     }

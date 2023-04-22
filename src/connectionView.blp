@@ -3,5 +3,18 @@ using Adw 1;
 
 template TrilogyConnectionView : Gtk.Box {
   orientation: vertical;
-  margin-top: 10;
+
+  Adw.HeaderBar {
+      show-start-title-buttons: bind TrilogyConnectionView.show-start-title-buttons;
+
+      title-widget: Adw.WindowTitle {
+        title: bind TrilogyConnectionView.connection.name;
+        subtitle: bind TrilogyConnectionView.connection.prettyType;
+      };
+  }
+
+  Box {
+    orientation: vertical;
+    margin-top: 10;
+  }
 }
