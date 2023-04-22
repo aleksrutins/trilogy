@@ -4,17 +4,37 @@ using Adw 1;
 template TrilogyConnectionView : Gtk.Box {
   orientation: vertical;
 
-  Adw.HeaderBar {
-      show-start-title-buttons: bind TrilogyConnectionView.show-start-title-buttons;
+  Adw.ToolbarView {
+    top-bar-style: raised;
+    [top]
+    Adw.HeaderBar {
+        show-start-title-buttons: bind TrilogyConnectionView.show-start-title-buttons;
 
-      title-widget: Adw.WindowTitle {
-        title: bind TrilogyConnectionView.connection.name;
-        subtitle: bind TrilogyConnectionView.connection.prettyType;
-      };
-  }
+        title-widget: Adw.WindowTitle {
+          title: bind TrilogyConnectionView.connection.name;
+          subtitle: bind TrilogyConnectionView.connection.prettyType;
+        };
+    }
+    [top]
+    Box {
+      styles ["toolbar"]
 
-  Box {
-    orientation: vertical;
-    margin-top: 10;
+      halign: center;
+
+      Adw.ViewSwitcher {
+        stack: view_stack;
+      }
+    }
+
+    content: Adw.ViewStack view_stack {
+      Adw.ViewStackPage {
+        name: "info";
+        title: "Info";
+        icon-name: "about-symbolic";
+        child: Label {
+          label: "Info";
+        };
+      }
+    };
   }
 }
