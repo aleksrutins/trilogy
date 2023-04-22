@@ -1,7 +1,7 @@
 {
     "app-id" : "com.rutins.Trilogy",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "44",
+    "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
     "command" : "com.rutins.Trilogy",
     "finish-args" : [
@@ -51,8 +51,7 @@
             "sources" : [
                 {
                     "type": "git",
-                    "url": "https://gitlab.gnome.org/aleksrutins/kaste",
-                    "tag": "v0.1.0"
+                    "url": "https://gitlab.gnome.org/aleksrutins/kaste"
                 }
 	    ]
 	},
