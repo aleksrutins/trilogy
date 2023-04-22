@@ -1,10 +1,8 @@
 using Gtk 4.0;
 using Adw 1;
 
-template TrilogyConnectionView : Gtk.Box {
-  orientation: vertical;
-
-  Adw.ToolbarView {
+template TrilogyConnectionView : Adw.Bin {
+  child: Adw.ToolbarView {
     top-bar-style: raised;
     [top]
     Adw.HeaderBar {
@@ -36,5 +34,5 @@ template TrilogyConnectionView : Gtk.Box {
         };
       }
     };
-  }
+  };
 }

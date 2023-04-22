@@ -1,8 +1,9 @@
 import GObject from 'gi://GObject'
 import Gtk from 'gi://Gtk'
+import Adw from 'gi://Adw'
 import Tlg from 'gi://Tlg'
 
-export class ConnectionView extends Gtk.Box {
+export class ConnectionView extends Adw.Bin {
     static {
         GObject.registerClass({
             GTypeName: 'TrilogyConnectionView',
