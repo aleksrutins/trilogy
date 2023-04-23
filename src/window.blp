@@ -31,7 +31,7 @@ template TrilogyWindow : Adw.ApplicationWindow {
       ListBox connections_list {
         styles ["navigation-sidebar"]
 
-        row-selected => navigate();
+        row-activated => navigate();
 
         margin-top: 10;
         margin-bottom: 10;
