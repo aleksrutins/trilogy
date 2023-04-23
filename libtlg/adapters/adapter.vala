@@ -33,7 +33,7 @@ public enum Tlg.Protocol {
 }
 
 public interface Tlg.Adapter : Object {
-    public abstract string connection_uri { get; construct set; }
+    public abstract Connection connection { get; construct set; }
 
     public abstract Gtk.Widget overview_page();
 }

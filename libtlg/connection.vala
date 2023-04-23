@@ -54,7 +54,7 @@ namespace Tlg {
             if(type == null) db = null;
             assert(url != null);
             db = (Adapter?)Object.@new(type,
-                            connection_uri: url);
+                            connection: this);
         }
     }
 }
