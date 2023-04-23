@@ -67,7 +67,7 @@ export class AddConnectionDialog extends Adw.Window {
             this._nameEntry.remove_css_class("error");
         }
 
-        if(!url.startsWith('postgresql://') || !url) {
+        if(Tlg.protocol_for_uri(url) == Tlg.Protocol.UNKNOWN) {
             failed = true;
             this._urlEntry.add_css_class("error");
         } else {

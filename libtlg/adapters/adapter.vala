@@ -26,6 +26,10 @@ public enum Tlg.Protocol {
                 return UNKNOWN;
         }
     }
+    public static Tlg.Protocol for_uri(string uri) {
+        var uri_protocol = uri.split("://")[0];
+        return for_string(uri_protocol);
+    }
 }
 
 public interface Tlg.Adapter : Object {
