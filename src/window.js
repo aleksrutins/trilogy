@@ -40,7 +40,7 @@ export class TrilogyWindow extends Adw.ApplicationWindow {
         GObject.registerClass({
             GTypeName: 'TrilogyWindow',
             Template: 'resource:///com/rutins/Trilogy/window.ui',
-            InternalChildren: ['connections_list', 'view_stack', 'conn_view']
+            InternalChildren: ['connections_list', 'view_stack', 'leaflet', 'navbar', 'main_content']
         }, this);
     }
 
@@ -71,11 +71,23 @@ export class TrilogyWindow extends Adw.ApplicationWindow {
     navigate(list, row, data) {
         if(row != null) {
             const conn = row.get_child().connection;
-            this._view_stack.set_visible_child_name('connection');
-            this._conn_view.connection = conn;
+            if(!this._view_stack.get_child_by_name('connection-' + conn.name)) {
+                const page = new ConnectionView();
+                page.connection = conn;
+                var sstbExpr = Gtk.PropertyExpression.new(Adw.Leaflet, null, "folded");
+                sstbExpr.bind(page, "show-start-title-buttons", this._leaflet);
+                page.connect('go-to-navigation', this.goToNavigation.bind(this));
+                this._view_stack.add_named(page, 'connection-' + conn.name);
+            }
+            this._view_stack.set_visible_child_name('connection-' + conn.name);
         } else {
             this._conn_view.connection = null;
             this._view_stack.set_visible_child_name('welcome');
         }
+        this._leaflet.set_visible_child(this._main_content);
+    }
+
+    goToNavigation() {
+        this._leaflet.set_visible_child(this._navbar);
     }
 }

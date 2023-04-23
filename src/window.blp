@@ -8,7 +8,7 @@ template TrilogyWindow : Adw.ApplicationWindow {
   title: "Trilogy";
 
   Adw.Leaflet leaflet {
-    Box {
+    Box navbar {
       orientation: vertical;
 
       Adw.HeaderBar left_header_bar {
@@ -45,7 +45,7 @@ template TrilogyWindow : Adw.ApplicationWindow {
       child: Separator {};
     }
 
-    Box {
+    Box main_content {
       orientation: vertical;
       hexpand: true;
 
@@ -64,6 +64,13 @@ template TrilogyWindow : Adw.ApplicationWindow {
               styles ["flat"]
 
               show-start-title-buttons: bind leaflet.folded;
+
+              [start]
+              Button {
+                visible: bind leaflet.folded;
+                icon-name: "go-previous-symbolic";
+                clicked => goToNavigation();
+              }
             }
 
             Box {
@@ -86,12 +93,6 @@ template TrilogyWindow : Adw.ApplicationWindow {
                 label: "Select or create a connection from the left sidebar to get started.";
               }
             }
-          };
-        }
-        Adw.ViewStackPage {
-          name: 'connection';
-          child: .TrilogyConnectionView conn_view {
-            show-start-title-buttons: bind leaflet.folded;
           };
         }
       }

@@ -10,29 +10,21 @@ template TrilogyConnectionView : Adw.Bin {
 
         title-widget: Adw.WindowTitle {
           title: bind TrilogyConnectionView.connection.name;
-          subtitle: bind TrilogyConnectionView.connection.prettyType;
+          subtitle: bind TrilogyConnectionView.connection.protocol_name;
         };
+
+        [start]
+        Button {
+          visible: bind TrilogyConnectionView.show-start-title-buttons;
+          icon-name: 'go-previous-symbolic';
+          clicked => goToNavigation();
+        }
     }
     [top]
-    Box {
-      styles ["toolbar"]
-
-      halign: center;
-
-      Adw.ViewSwitcher {
-        stack: view_stack;
-      }
+    Adw.TabBar {
+      view: tab_view;
     }
 
-    content: Adw.ViewStack view_stack {
-      Adw.ViewStackPage {
-        name: "info";
-        title: "Info";
-        icon-name: "about-symbolic";
-        child: Label {
-          label: "Info";
-        };
-      }
-    };
+    content: Adw.TabView tab_view {};
   };
 }

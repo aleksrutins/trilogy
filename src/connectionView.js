@@ -1,9 +1,12 @@
 import GObject from 'gi://GObject'
 import Gtk from 'gi://Gtk'
 import Adw from 'gi://Adw'
+import Gio from 'gi://Gio'
 import Tlg from 'gi://Tlg'
 
 export class ConnectionView extends Adw.Bin {
+    overviewPage = null;
+
     static {
         GObject.registerClass({
             GTypeName: 'TrilogyConnectionView',
@@ -23,7 +26,11 @@ export class ConnectionView extends Adw.Bin {
                     false
                 )
             },
-            Template: 'resource:///com/rutins/Trilogy/connectionView.ui'
+            Signals: {
+                'go-to-navigation': {}
+            },
+            Template: 'resource:///com/rutins/Trilogy/connectionView.ui',
+            InternalChildren: ['tab_view']
         }, this)
     }
 
@@ -53,6 +60,21 @@ export class ConnectionView extends Adw.Bin {
 
         if(!conn.connected) {
             conn.ensure();
+            console.assert(conn.db != null);
+            if(this.overviewPage != null) {
+                const page = this._tab_view.get_page(this.overviewPage);
+                this._tab_view.set_page_pinned(page, false);
+                this._tab_view.close_page(page);
+            }
+            this.overviewPage = conn.db.overview_page();
+            this._tab_view.append_pinned(this.overviewPage);
+            const page = this._tab_view.get_page(this.overviewPage);
+            page.icon = Gio.Icon.new_for_string('about-symbolic');
+            page.title = "Overview";
         }
+    }
+
+    goToNavigation() {
+        this.emit('go-to-navigation');
     }
 }

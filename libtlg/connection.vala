@@ -1,10 +1,10 @@
-using Postgres;
+using Tlg;
 
 namespace Tlg {
     public class Connection : Object, Json.Serializable {
-        public static Gee.HashMap<string, weak Database> connections = new Gee.HashMap<string, weak Database>();
-        public Database? db {
-            get {
+        public static Gee.HashMap<string, Adapter> connections = new Gee.HashMap<string, Adapter>();
+        public Adapter? db {
+            owned get {
                 return connections.@get(name);
             }
             set {
@@ -19,17 +19,16 @@ namespace Tlg {
         }
         public string name {get; construct set;}
         public string url {get; construct set;}
-        public string prettyType {
+        public Protocol protocol {
             get {
-                if(url == null) return "Unknown Type";
-                var protocol = url.split("://")[0];
-
-                switch(protocol) {
-                    case "postgresql":
-                        return "PostgreSQL";
-                    default:
-                        return "Unknown Type";
-                }
+                if(url == null) return UNKNOWN;
+                var uri_protocol = url.split("://")[0];
+                return Protocol.for_string(uri_protocol);
+            }
+        }
+        public string protocol_name {
+            owned get {
+                return protocol.to_string();
             }
         }
 
@@ -49,7 +48,13 @@ namespace Tlg {
         }
 
         public void ensure() {
-            db = connect_db(url);
+            assert(protocol != UNKNOWN);
+            var type = protocol.get_adapter();
+            assert(type != null);
+            if(type == null) db = null;
+            assert(url != null);
+            db = (Adapter?)Object.@new(type,
+                            connection_uri: url);
         }
     }
 }
