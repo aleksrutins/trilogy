@@ -33,12 +33,12 @@ template TrilogyAddConnectionDialog : Adw.Window {
       margin-start: 10;
       margin-end: 10;
 
-      Entry nameEntry {
+      Entry name_entry {
         placeholder-text: "Name";
         changed => validate_input();
       }
 
-      Entry urlEntry {
+      Entry url_entry {
         placeholder-text: "Connection URL";
         changed => validate_input();
       }

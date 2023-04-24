@@ -17,9 +17,10 @@ template TrilogyConnectionView : Adw.Bin {
         Button {
           visible: bind TrilogyConnectionView.show-start-title-buttons;
           icon-name: 'go-previous-symbolic';
-          clicked => go_to_navigation();
+          clicked => _back_clicked();
         }
     }
+    
     [top]
     Adw.TabBar {
       view: tab_view;

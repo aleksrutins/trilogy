@@ -3,42 +3,36 @@ from gi.repository import Gtk, GObject, Gio, Adw, Tlg
 @Gtk.Template(resource_path='/com/rutins/Trilogy/connectionView.ui')
 class ConnectionView(Adw.Bin):
     __gtype_name__ = 'TrilogyConnectionView'
-    _connection: Tlg.Connection
-    _show_start_title_buttons: bool
+    __gsignals__ = {
+        'go-to-navigation': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, ())
+    }
+
     _overview_page = None
 
     tab_view = Gtk.Template.Child()
 
-    @GObject.Property(type=Tlg.Connection)
-    def connection(self):
-        return self._connection
+    connection = GObject.Property(type=Tlg.Connection)
+    show_start_title_buttons = GObject.Property(type=bool, default=False)
 
-    @connection.setter
-    def connection(self, new_conn):
-        self._connection = new_conn
+    def __init__(self, conn):
+        super().__init__()
+        self.props.connection = conn
+        self.refresh_connection()
 
-    @GObject.Property(type=Tlg.Connection)
-    def show_start_title_buttons(self) -> bool:
-        return self._show_start_title_buttons
-
-    @show_start_title_buttons.setter
-    def show_start_title_buttons(self, new_value: bool):
-        self._show_start_title_buttons = new_value
-
-    @GObject.Signal()
-    def go_to_navigation(self):
-        pass
+    @Gtk.Template.Callback()
+    def _back_clicked(self, *args):
+        self.emit('go-to-navigation')
 
     def refresh_connection(self):
-        conn = self.connection()
+        conn = self.props.connection
 
-        if not conn.connected:
+        if not conn.props.connected:
             conn.ensure()
             if self._overview_page is not None:
                 page = self.tab_view.get_page(self._overview_page)
                 self.tab_view.set_page_pinned(page, False)
                 self.tab_view.close_page(page)
-            self._overview_page = conn.db.overview_page()
+            self._overview_page = conn.props.db.overview_page()
             self.tab_view.append_pinned(self._overview_page)
             page = self.tab_view.get_page(self._overview_page)
             page.set_icon(Gio.Icon.new_for_string('about-symbolic'))

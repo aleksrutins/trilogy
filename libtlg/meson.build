@@ -1,7 +1,8 @@
 api_version = '0.1'
 libtlg_srcs = [
 	'reflection.vala',
-	'connection.vala'
+	'connection.vala',
+  'util.vala'
 ]
 
 libtlg_deps = [

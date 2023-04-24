@@ -12,6 +12,7 @@ class TrilogyWindow(Adw.ApplicationWindow):
     connections_list = Gtk.Template.Child()
     view_stack = Gtk.Template.Child()
     navbar = Gtk.Template.Child()
+    main_content = Gtk.Template.Child()
 
     bucket = Kaste.Bucket.new('com.rutins.Trilogy.connections', False)
 
@@ -31,30 +32,30 @@ class TrilogyWindow(Adw.ApplicationWindow):
             preview = ConnectionPreview(data)
             self.connections_list.append(preview)
     
-    def actually_add_connection(self, conn):
-        self.bucket.write(conn.name, conn)
+    def actually_add_connection(self, _, conn):
+        self.bucket.write(conn.props.name, conn)
         self.reload_connections()
 
-    def add_connection(self):
+    @Gtk.Template.Callback()
+    def _add_connection(self, *args):
         dlg = AddConnectionDialog(self)
         dlg.connect('add-connection', self.actually_add_connection)
+        dlg.present()
     
     @Gtk.Template.Callback()
-    def navigate(self, _list, row, _data):
-        print('Navigating: ', row)
+    def _navigate(self, _list, row):
         if row != None:
-            conn = row.get_child().connection()
-            if self.view_stack.get_child_by_name('connection-' + conn.name) is None:
-                page = ConnectionView()
-                page.props.connection = conn
-                sstb_expr = Gtk.PropertyExpression.new(Adw.Leaflet, None, 'folded')
-                sstb_expr.bind(page, 'show-start-title-buttons', self.leaflet)
-                page.connect('go-to-navigation', self.go_to_navigation)
-                self.view_stack.add_named(page, 'connection-' + conn.name)
-            self.view_stack.set_visible_child_name('connection-' + conn.name)
+            conn = row.get_child().connection
+            if self.view_stack.get_child_by_name('connection-' + conn.props.name) is None:
+                page = ConnectionView(conn)
+                Tlg.util_bind_leaflet(page, self.leaflet)
+                page.connect('go-to-navigation', self._go_to_navigation)
+                self.view_stack.add_named(page, 'connection-' + conn.props.name)
+            self.view_stack.set_visible_child_name('connection-' + conn.props.name)
         else:
             self.view_stack.set_visible_child_name('welcome')
+        self.leaflet.set_visible_child(self.main_content)
 
     @Gtk.Template.Callback()
-    def go_to_navigation(self):
+    def _go_to_navigation(self, *args):
         self.leaflet.set_visible_child(self.navbar)

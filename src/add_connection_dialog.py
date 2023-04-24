@@ -3,32 +3,25 @@ from gi.repository import Gtk, Adw, GObject, Tlg
 @Gtk.Template(resource_path='/com/rutins/Trilogy/addConnectionDialog.ui')
 class AddConnectionDialog(Adw.Window):
     __gtype_name__ = 'TrilogyAddConnectionDialog'
-    _valid = False
+    __gsignals__ = {
+        'add_connection': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, (Tlg.Connection,))
+    }
 
     name_entry = Gtk.Template.Child()
     url_entry = Gtk.Template.Child()
 
-    def __init__(main_window):
-        super.__init__(transient_for=main_window, modal=True)
+    valid = GObject.Property(type=bool, default=False)
 
-    @GObject.Property(type=bool, default=False)
-    def valid(self) -> bool:
-        return self._valid
-    
-    @valid.setter
-    def valid(self, value: bool):
-        self._valid = value
-    
-    @GObject.Signal(arg_types=(Tlg.Connection,))
-    def add_connection(self):
-        pass
-    
+    def __init__(self, main_window):
+        super().__init__(transient_for=main_window, modal=True)
+        self.validate_input()
+        
     @Gtk.Template.Callback()
-    def cancel_clicked(self):
+    def cancel_clicked(self, *args):
         self.close()
     
     @Gtk.Template.Callback()
-    def add_clicked(self):
+    def add_clicked(self, *args):
         self.emit('add-connection', Tlg.Connection(
             name=self.name_entry.get_text(),
             url=self.url_entry.get_text()
@@ -36,7 +29,7 @@ class AddConnectionDialog(Adw.Window):
         self.close()
     
     @Gtk.Template.Callback()
-    def validate_input(self):
+    def validate_input(self, *args):
         name: str = self.name_entry.get_text()
         url: str = self.url_entry.get_text()
         failed = False
