@@ -12,7 +12,7 @@ template TrilogyAddConnectionDialog : Adw.Window {
       [start]
       Button {
         label: "Cancel";
-        clicked => cancelClicked();
+        clicked => cancel_clicked();
       }
 
       [end]
@@ -20,7 +20,7 @@ template TrilogyAddConnectionDialog : Adw.Window {
         styles ["suggested-action"]
         label: "Add";
         sensitive: bind TrilogyAddConnectionDialog.valid;
-        clicked => addClicked();
+        clicked => add_clicked();
       }
     }
 
@@ -35,12 +35,12 @@ template TrilogyAddConnectionDialog : Adw.Window {
 
       Entry nameEntry {
         placeholder-text: "Name";
-        changed => validateInput();
+        changed => validate_input();
       }
 
       Entry urlEntry {
         placeholder-text: "Connection URL";
-        changed => validateInput();
+        changed => validate_input();
       }
     }
   }

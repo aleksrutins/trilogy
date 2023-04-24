@@ -18,7 +18,7 @@ template TrilogyWindow : Adw.ApplicationWindow {
         [start]
         Button {
           icon-name: "plus-large-symbolic";
-          clicked => addConnection();
+          clicked => add_connection();
         }
 
         [end]
@@ -32,11 +32,6 @@ template TrilogyWindow : Adw.ApplicationWindow {
         styles ["navigation-sidebar"]
 
         row-activated => navigate();
-
-        margin-top: 10;
-        margin-bottom: 10;
-        margin-start: 10;
-        margin-end: 10;
       }
     }
 
@@ -69,7 +64,7 @@ template TrilogyWindow : Adw.ApplicationWindow {
               Button {
                 visible: bind leaflet.folded;
                 icon-name: "go-previous-symbolic";
-                clicked => goToNavigation();
+                clicked => go_to_navigation();
               }
             }
 

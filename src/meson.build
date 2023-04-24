@@ -1,12 +1,6 @@
-pkgdatadir = join_paths(get_option('datadir'), meson.project_name())
+pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
+moduledir = join_paths(pkgdatadir, 'trilogy')
 gnome = import('gnome')
-
-src_res = gnome.compile_resources('com.rutins.Trilogy.src',
-  'com.rutins.Trilogy.src.gresource.xml',
-  gresource_bundle: true,
-  install: true,
-  install_dir: pkgdatadir,
-)
 
 blueprints = custom_target('blueprints',
   input: files(
@@ -20,27 +14,38 @@ blueprints = custom_target('blueprints',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
 )
 
-data_res = gnome.compile_resources('com.rutins.Trilogy.data',
-  'com.rutins.Trilogy.data.gresource.xml',
+data_res = gnome.compile_resources('trilogy',
+  'trilogy.gresource.xml',
   gresource_bundle: true,
   install: true,
   dependencies: blueprints,
   install_dir: pkgdatadir,
 )
 
-bin_conf = configuration_data()
-bin_conf.set('GJS', find_program('gjs').full_path())
-bin_conf.set('PACKAGE_VERSION', meson.project_version())
-bin_conf.set('PACKAGE_NAME', meson.project_name())
-bin_conf.set('prefix', get_option('prefix'))
-bin_conf.set('libdir', join_paths(get_option('prefix'), get_option('libdir')))
-bin_conf.set('datadir', join_paths(get_option('prefix'), get_option('datadir')))
-bin_conf.set('resource_path', '/com/rutins/Trilogy')
+python = import('python')
+
+conf = configuration_data()
+conf.set('PYTHON', python.find_installation('python3').path())
+conf.set('VERSION', meson.project_version())
+conf.set('localedir', join_paths(get_option('prefix'), get_option('localedir')))
+conf.set('pkgdatadir', pkgdatadir)
 
 configure_file(
   input: 'com.rutins.Trilogy.in',
   output: 'com.rutins.Trilogy',
-  configuration: bin_conf,
+  configuration: conf,
   install: true,
-  install_dir: get_option('bindir')
+  install_dir: get_option('bindir'),
+  install_mode: 'r-xr--r--'
 )
+
+trilogy_srcs = [
+  '__init__.py',
+  'main.py',
+  'window.py',
+  'add_connection_dialog.py',
+  'connection_preview.py',
+  'connection_view.py'
+]
+
+install_data(trilogy_srcs, install_dir: moduledir)
