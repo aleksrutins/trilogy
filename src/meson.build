@@ -8,7 +8,8 @@ blueprints = custom_target('blueprints',
     'window.blp',
     'connectionPreview.blp',
     'addConnectionDialog.blp',
-    'connectionView.blp'
+    'connectionView.blp',
+    'connection_settings.blp'
   ),
   output: '.',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
@@ -45,7 +46,8 @@ trilogy_srcs = [
   'window.py',
   'add_connection_dialog.py',
   'connection_preview.py',
-  'connection_view.py'
+  'connection_view.py',
+  'connection_settings.py'
 ]
 
 install_data(trilogy_srcs, install_dir: moduledir)

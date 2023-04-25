@@ -4,7 +4,8 @@ from gi.repository import Gtk, GObject, Gio, Adw, Tlg
 class ConnectionView(Adw.Bin):
     __gtype_name__ = 'TrilogyConnectionView'
     __gsignals__ = {
-        'go-to-navigation': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, ())
+        'go-to-navigation': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, ()),
+        'open-settings': (GObject.SIGNAL_RUN_LAST, GObject.TYPE_NONE, (str,))
     }
 
     _overview_page = None
@@ -22,6 +23,10 @@ class ConnectionView(Adw.Bin):
     @Gtk.Template.Callback()
     def _back_clicked(self, *args):
         self.emit('go-to-navigation')
+    
+    @Gtk.Template.Callback()
+    def _open_settings(self, *args):
+        self.emit('open-settings', self.props.connection.props.name)
 
     def refresh_connection(self):
         conn = self.props.connection

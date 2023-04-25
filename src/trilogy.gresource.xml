@@ -5,10 +5,12 @@
     <file preprocess="xml-stripblanks">connectionPreview.ui</file>
     <file preprocess="xml-stripblanks">connectionView.ui</file>
     <file preprocess="xml-stripblanks">addConnectionDialog.ui</file>
+    <file preprocess="xml-stripblanks">connection_settings.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
 
     <file preprocess="xml-stripblanks">icons/scalable/actions/plus-large-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/actions/circle-filled-symbolic.svg</file>
     <file preprocess="xml-stripblanks">icons/scalable/actions/about-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/scalable/actions/settings-symbolic.svg</file>
   </gresource>
 </gresources>

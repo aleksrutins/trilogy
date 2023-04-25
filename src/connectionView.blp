@@ -19,8 +19,14 @@ template TrilogyConnectionView : Adw.Bin {
           icon-name: 'go-previous-symbolic';
           clicked => _back_clicked();
         }
+
+        [end]
+        Button {
+          icon-name: 'settings-symbolic';
+          clicked => _open_settings();
+        }
     }
-    
+
     [top]
     Adw.TabBar {
       view: tab_view;
