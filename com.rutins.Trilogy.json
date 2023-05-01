@@ -36,7 +36,15 @@
         },
         {
             "name": "postgres",
-            "buildsystem": "autotools",
+            "buildsystem": "simple",
+            "no-make-install": true,
+            "build-commands": [
+            	"./configure --prefix=/app",
+            	"cd src/interfaces/libpq; make; make install; cd -",
+		"cd src/bin/pg_config; make install; cd -",
+		"cd src/backend; make generated-headers; cd -",
+		"cd src/include; make install; cd -"
+	    ],
             "sources": [
                 {
                     "type": "archive",
