@@ -6,10 +6,10 @@ blueprints = custom_target('blueprints',
   input: files(
     'gtk/help-overlay.blp',
     'window.blp',
-    'connectionPreview.blp',
-    'addConnectionDialog.blp',
-    'connectionView.blp',
-    'connection_settings.blp'
+    'connection-preview.blp',
+    'add-connection-dialog.blp',
+    'connection-view.blp',
+    'connection-settings.blp'
   ),
   output: '.',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],

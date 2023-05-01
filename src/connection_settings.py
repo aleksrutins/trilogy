@@ -2,7 +2,7 @@ import os
 
 from gi.repository import GObject, Gtk, Adw, Tlg, Kaste
 
-@Gtk.Template(resource_path='/com/rutins/Trilogy/connection_settings.ui')
+@Gtk.Template(resource_path='/com/rutins/Trilogy/connection-settings.ui')
 class ConnectionSettings(Adw.Window):
     __gtype_name__ = 'TrilogyConnectionSettings'
     

@@ -3,10 +3,10 @@
   <gresource prefix="/com/rutins/Trilogy">
     <!-- UI definitions -->
     <file preprocess="xml-stripblanks">window.ui</file>
-    <file preprocess="xml-stripblanks">connectionPreview.ui</file>
-    <file preprocess="xml-stripblanks">connectionView.ui</file>
-    <file preprocess="xml-stripblanks">addConnectionDialog.ui</file>
-    <file preprocess="xml-stripblanks">connection_settings.ui</file>
+    <file preprocess="xml-stripblanks">connection-preview.ui</file>
+    <file preprocess="xml-stripblanks">connection-view.ui</file>
+    <file preprocess="xml-stripblanks">add-connection-dialog.ui</file>
+    <file preprocess="xml-stripblanks">connection-settings.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
 
     <!-- Styles -->

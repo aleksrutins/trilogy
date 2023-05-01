@@ -1,6 +1,6 @@
 from gi.repository import Gtk, GObject, Tlg
 
-@Gtk.Template(resource_path = "/com/rutins/Trilogy/connectionPreview.ui")
+@Gtk.Template(resource_path = "/com/rutins/Trilogy/connection-preview.ui")
 class ConnectionPreview(Gtk.Box):
     __gtype_name__ = 'TrilogyConnectionPreview'
     __gsignals__ = {

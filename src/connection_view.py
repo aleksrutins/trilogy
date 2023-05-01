@@ -1,6 +1,6 @@
 from gi.repository import Gtk, GObject, Gio, Adw, Tlg
 
-@Gtk.Template(resource_path='/com/rutins/Trilogy/connectionView.ui')
+@Gtk.Template(resource_path='/com/rutins/Trilogy/connection-view.ui')
 class ConnectionView(Adw.Bin):
     __gtype_name__ = 'TrilogyConnectionView'
     __gsignals__ = {

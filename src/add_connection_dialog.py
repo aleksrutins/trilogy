@@ -1,6 +1,6 @@
 from gi.repository import Gtk, Adw, GObject, Tlg
 
-@Gtk.Template(resource_path='/com/rutins/Trilogy/addConnectionDialog.ui')
+@Gtk.Template(resource_path='/com/rutins/Trilogy/add-connection-dialog.ui')
 class AddConnectionDialog(Adw.Window):
     __gtype_name__ = 'TrilogyAddConnectionDialog'
     __gsignals__ = {
