@@ -1,7 +1,7 @@
 {
     "app-id" : "com.rutins.Trilogy",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "master",
+    "runtime-version" : "44",
     "sdk" : "org.gnome.Sdk",
     "command" : "com.rutins.Trilogy",
     "finish-args" : [
@@ -40,10 +40,11 @@
             "no-make-install": true,
             "build-commands": [
             	"./configure --prefix=/app",
-            	"cd src/interfaces/libpq; make; make install; cd -",
-		"cd src/bin/pg_config; make install; cd -",
-		"cd src/backend; make generated-headers; cd -",
-		"cd src/include; make install; cd -"
+            	"make -C src/interfaces/libpq",
+            	"make -C src/interfaces/libpq install",
+		"make -C src/bin/pg_config install",
+		"make -C src/backend generated-headers",
+		"make -C src/include install"
 	    ],
             "sources": [
                 {
@@ -59,7 +60,8 @@
             "sources" : [
                 {
                     "type": "git",
-                    "url": "https://gitlab.gnome.org/aleksrutins/kaste"
+                    "url": "https://gitlab.gnome.org/aleksrutins/kaste",
+                    "tag": "v0.1.0"
                 }
 	    ]
 	},

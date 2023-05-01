@@ -6,7 +6,7 @@ gi.require_version('Adw', '1')
 gi.require_version('Kaste', '0.1')
 gi.require_version('Tlg', '0.1')
 
-from gi.repository import Gtk, Gio, Adw
+from gi.repository import Gtk, Gdk, Gio, Adw
 from .window import TrilogyWindow
 
 
@@ -23,9 +23,12 @@ class TrilogyApplication(Adw.Application):
     def do_activate(self):
         """Called when the application is activated.
 
-        We raise the application's main window, creating it if
+        We create the style manager, and raise the application's main window, creating it if
         necessary.
         """
+        style_provider = Gtk.CssProvider()
+        style_provider.load_from_resource('/com/rutins/Trilogy/app.css')
+        Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(), style_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
         win = self.props.active_window
         if not win:
             win = TrilogyWindow(application=self)
