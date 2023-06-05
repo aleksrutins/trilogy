@@ -34,7 +34,7 @@ class AddConnectionDialog(Adw.Window):
         url: str = self.url_entry.get_text()
         failed = False
 
-        if name.find(' ') != -1 or name == '':
+        if name == '':
             failed = True
             self.name_entry.add_css_class('error')
         else:
