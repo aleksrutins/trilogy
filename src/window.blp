@@ -1,0 +1,120 @@
+using Gtk 4.0;
+using Adw 1;
+
+template TrilogyWindow : Adw.ApplicationWindow {
+  default-width: 800;
+  default-height: 400;
+
+  title: "Trilogy";
+
+  Adw.Leaflet leaflet {
+    Box navbar {
+      orientation: vertical;
+
+      Adw.HeaderBar left_header_bar {
+        show-end-title-buttons: bind leaflet.folded;
+        title-widget: Adw.WindowTitle { title: "Connections"; };
+
+        [start]
+        Button {
+          icon-name: "plus-large-symbolic";
+          clicked => _add_connection();
+        }
+
+        [end]
+        MenuButton {
+          icon-name: "open-menu-symbolic";
+          menu-model: primary_menu;
+        }
+      }
+
+      ListBox connections_list {
+        styles ["navigation-sidebar"]
+
+        row-activated => _navigate();
+      }
+    }
+
+    Adw.LeafletPage {
+      navigatable: false;
+      child: Separator {};
+    }
+
+    Box main_content {
+      orientation: vertical;
+      hexpand: true;
+
+      Adw.ViewStack view_stack {
+        Adw.ViewStackPage {
+          name: "welcome";
+
+          child: Box {
+            orientation: vertical;
+            halign: fill;
+            valign: fill;
+            hexpand: true;
+            vexpand: true;
+
+            Adw.HeaderBar header_bar {
+              styles ["flat"]
+
+              show-start-title-buttons: bind leaflet.folded;
+
+              [start]
+              Button {
+                visible: bind leaflet.folded;
+                icon-name: "go-previous-symbolic";
+                clicked => _go_to_navigation();
+              }
+            }
+
+            Box {
+              orientation: vertical;
+              margin-top: 10;
+              margin-bottom: 10;
+              margin-start: 30;
+              margin-end: 30;
+              halign: center;
+              valign: center;
+              hexpand: true;
+              vexpand: true;
+
+              Label {
+                styles ["title-1"]
+                label: "Welcome";
+              }
+
+              Label {
+                label: "Select or create a connection from the left sidebar to get started.";
+              }
+            }
+          };
+        }
+      }
+    }
+  }
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("_Preferences");
+      action: "app.preferences";
+    }
+
+    item {
+      label: _("_Keyboard Shortcuts");
+      action: "win.show-help-overlay";
+    }
+
+    item {
+      label: _("_About Trilogy");
+      action: "app.about";
+    }
+
+    item {
+      label: _("_Quit");
+      action: "app.quit";
+    }
+  }
+}

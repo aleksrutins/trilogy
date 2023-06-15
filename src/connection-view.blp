@@ -1,0 +1,38 @@
+using Gtk 4.0;
+using Adw 1;
+
+template TrilogyConnectionView : Adw.Bin {
+  child: Gtk.Box {
+    orientation: vertical;
+    spacing: 0;
+
+    Adw.HeaderBar {
+        styles ["merged-headerbar"]
+        show-start-title-buttons: bind TrilogyConnectionView.show-start-title-buttons;
+
+        title-widget: Adw.WindowTitle {
+          title: bind TrilogyConnectionView.connection.name;
+          subtitle: bind TrilogyConnectionView.connection.protocol_name;
+        };
+
+        [start]
+        Button {
+          visible: bind TrilogyConnectionView.show-start-title-buttons;
+          icon-name: 'go-previous-symbolic';
+          clicked => _back_clicked();
+        }
+
+        [end]
+        Button {
+          icon-name: 'settings-symbolic';
+          clicked => _open_settings();
+        }
+    }
+
+    Adw.TabBar {
+      view: tab_view;
+    }
+
+    Adw.TabView tab_view {}
+  };
+}

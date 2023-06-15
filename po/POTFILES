@@ -1,0 +1,6 @@
+data/com.rutins.Trilogy.desktop.in
+data/com.rutins.Trilogy.appdata.xml.in
+data/com.rutins.Trilogy.gschema.xml
+src/main.js
+src/window.js
+src/window.ui
