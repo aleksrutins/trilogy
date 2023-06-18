@@ -37,3 +37,6 @@ public interface Tlg.Adapter : Object {
 
     public abstract Gtk.Widget overview_page();
 }
+
+[CCode(gir_namespace = "Tlg", gir_version = "0.1")]
+namespace Tlg.Adapters {}
