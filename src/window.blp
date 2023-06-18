@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template TrilogyWindow : Adw.ApplicationWindow {
+template $TrilogyWindow : Adw.ApplicationWindow {
   default-width: 800;
   default-height: 400;
 
@@ -18,7 +18,7 @@ template TrilogyWindow : Adw.ApplicationWindow {
         [start]
         Button {
           icon-name: "plus-large-symbolic";
-          clicked => _add_connection();
+          clicked => $_add_connection();
         }
 
         [end]
@@ -31,7 +31,7 @@ template TrilogyWindow : Adw.ApplicationWindow {
       ListBox connections_list {
         styles ["navigation-sidebar"]
 
-        row-activated => _navigate();
+        row-activated => $_navigate();
       }
     }
 
@@ -64,7 +64,7 @@ template TrilogyWindow : Adw.ApplicationWindow {
               Button {
                 visible: bind leaflet.folded;
                 icon-name: "go-previous-symbolic";
-                clicked => _go_to_navigation();
+                clicked => $_go_to_navigation();
               }
             }
 

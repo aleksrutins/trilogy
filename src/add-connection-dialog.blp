@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template TrilogyAddConnectionDialog : Adw.Window {
+template $TrilogyAddConnectionDialog : Adw.Window {
   title: "Add Connection";
   Box {
     orientation: vertical;
@@ -12,15 +12,15 @@ template TrilogyAddConnectionDialog : Adw.Window {
       [start]
       Button {
         label: "Cancel";
-        clicked => cancel_clicked();
+        clicked => $cancel_clicked();
       }
 
       [end]
       Button {
         styles ["suggested-action"]
         label: "Add";
-        sensitive: bind TrilogyAddConnectionDialog.valid;
-        clicked => add_clicked();
+        sensitive: bind template.valid;
+        clicked => $add_clicked();
       }
     }
 
@@ -35,12 +35,12 @@ template TrilogyAddConnectionDialog : Adw.Window {
 
       Entry name_entry {
         placeholder-text: "Name";
-        changed => validate_input();
+        changed => $validate_input();
       }
 
       Entry url_entry {
         placeholder-text: "Connection URL";
-        changed => validate_input();
+        changed => $validate_input();
       }
     }
   }

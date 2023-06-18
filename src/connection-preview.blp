@@ -1,7 +1,8 @@
 using Gtk 4.0;
 using Adw 1;
+using Tlg 0.1;
 
-template TrilogyConnectionPreview : Gtk.Box {
+template $TrilogyConnectionPreview : Gtk.Box {
   spacing: 5;
   margin-top: 5;
   margin-bottom: 5;
@@ -19,12 +20,12 @@ template TrilogyConnectionPreview : Gtk.Box {
     Label {
       styles ["title-4"]
       halign: start;
-      label: bind TrilogyConnectionPreview.connection.name;
+      label: bind (template.connection as <Tlg.Connection>).name;
     }
 
     Label {
       halign: start;
-      label: bind TrilogyConnectionPreview.connection.protocol_name;
+      label: bind (template.connection as <Tlg.Connection>).protocol-name;
     }
   }
 
@@ -33,6 +34,6 @@ template TrilogyConnectionPreview : Gtk.Box {
     hexpand: true;
     halign: end;
     icon-name: 'circle-filled-symbolic';
-    visible: bind TrilogyConnectionPreview.connection.connected;
+    visible: bind (template.connection as <Tlg.Connection>).connected;
   }
 }

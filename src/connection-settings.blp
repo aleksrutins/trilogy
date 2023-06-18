@@ -1,8 +1,8 @@
 using Gtk 4.0;
 using Adw 1;
 
-template TrilogyConnectionSettings : Adw.Window {
-    title: bind TrilogyConnectionSettings.connection;
+template $TrilogyConnectionSettings : Adw.Window {
+    title: bind template.connection;
     Gtk.Box {
         orientation: vertical;
         
@@ -26,7 +26,7 @@ template TrilogyConnectionSettings : Adw.Window {
             Button {
                 styles ["destructive-action"]
                 icon-name: "user-trash-symbolic";
-                clicked => _delete_clicked();
+                clicked => $_delete_clicked();
                 margin-top: 10;
                 margin-bottom: 10;
                 margin-end: 10;

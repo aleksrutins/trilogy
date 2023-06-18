@@ -33,3 +33,4 @@ class ConnectionSettings(Adw.Window):
             os.remove(self._bucket.get_resource_path(self.props.connection))
             self.close()
             self._wnd.reload_connections()
+
