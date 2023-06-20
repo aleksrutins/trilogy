@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <requires lib="gtk" version="4.0" />
+    <requires lib="Adw" version="1.0" />
+    <template class="TrilogyConnectionView" parent="AdwBin">
+        <property name="child">
+            <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="spacing">0</property>
+                <child>
+                    <object class="AdwHeaderBar">
+                        <style>
+                            <class>merged-headerbar</class>
+                        </style>
+                        <binding name="show-start-title-buttons">
+                            <lookup name="show-start-title-buttons">TrilogyConnectionView</lookup>
+                        </binding>
+                        <property name="title-widget">
+                            <object class="AdwWindowTitle">
+                                <binding name="title">
+                                    <lookup name="name">
+                                        <lookup name="connection">TrilogyConnectionView</lookup>
+                                    </lookup>
+                                </binding>
+                                <binding name="subtitle">
+                                    <lookup name="protocol-name">
+                                        <lookup name="connection">TrilogyConnectionView</lookup>
+                                    </lookup>
+                                </binding>
+                            </object>
+                        </property>
+
+                        <child type="start">
+                            <object class="GtkButton">
+                                <binding name="visible">
+                                    <lookup name="show-start-title-buttons">TrilogyConnectionView</lookup>
+                                </binding>
+                                <property name="icon-name">go-previous-symbolic</property>
+                                <signal name="clicked" handler="back_clicked"></signal>
+                            </object>
+                        </child>
+
+                        <child type="end">
+                            <object class="GtkButton">
+                                <property name="icon-name">settings-symbolic</property>
+                                <signal name="clicked" handler="handle_open_settings"></signal>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwTabBar">
+                        <property name="view">tab_view</property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="AdwTabView" id="tab_view"></object>
+                </child>
+            </object>
+        </property>
+    </template>
+</interface>

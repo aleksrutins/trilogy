@@ -37,8 +37,8 @@ namespace Trilogy {
             Object (application: app);
         }
 
-        private void reload_connections() {
-            var bucket = Applications.connections_bucket;
+        private void reload_connections() throws GLib.Error {
+            var bucket = Application.connections_bucket;
 
             Gtk.Widget preview;
             while((preview = connections_list.get_first_child()) != null) {
@@ -51,14 +51,14 @@ namespace Trilogy {
             while((item = contents.next_file()) != null) {
                 var name = item.get_name();
                 var data = (Connection)bucket.read(typeof(Connection), name);
-                var preview = new ConnectionPreview(data);
-                connections_list.append(preview);
+                var new_preview = new ConnectionPreview(data);
+                connections_list.append(new_preview);
             }
         }
 
         void add_connection() {
             var dlg = new AddConnectionDialog(this);
-            dlg.add_connection.connect(() => {
+            dlg.add_connection.connect((conn) => {
                 Application.connections_bucket.write(conn.name, conn);
                 reload_connections();
             });

@@ -1,0 +1,1 @@
+trilogy_sources += files('adapter.vala', 'protocol.vala')

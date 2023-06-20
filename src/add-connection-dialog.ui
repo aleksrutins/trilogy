@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="Adw" version="1.0"/>
+
+  <template class="TrilogyAddConnectionDialog" parent="AdwWindow">
+    <property name="title">Add Connection</property>
+
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+
+        <child>
+          <object class="AdwHeaderBar">
+            <property name="show-end-title-buttons">false</property>
+            <property name="show-start-title-buttons">false</property>
+
+            <child type="start">
+              <object class="GtkButton">
+                <property name="label">Cancel</property>
+                <signal name="clicked" handler="close"/>
+              </object>
+            </child>
+
+            <child type="end">
+              <object class="GtkButton">
+                <style>
+                  <class name="suggested-action"/>
+                </style>
+                <property name="label">Add</property>
+                <binding name="sensitive">
+                  <lookup name="valid">TrilogyAddConnectionDialog</lookup>
+                </binding>
+                <signal name="clicked" handler="add_clicked"/>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkBox">
+            <property name="hexpand">false</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">6</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+
+            <child>
+              <object class="GtkEntry" id="name_entry">
+                <property name="placeholder-text">Name</property>
+                <signal name="changed" handler="validate_input"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="url_entry">
+                <property name="placeholder-text">Connection URL</property>
+                <signal name="changed" handler="validate_input"/>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

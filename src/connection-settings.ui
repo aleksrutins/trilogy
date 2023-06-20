@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <requires lib="gtk" version="4.0"/>
+    <requires lib="Adw" version="1.0"/>
+
+    <template class="TrilogyConnectionSettings" parent="AdwWindow">
+        <binding name="title">
+        <lookup name="connection">TrilogyConnectionSettings</lookup></binding>
+        <child>
+            <object class="GtkBox">
+                <property name="orientation">vertical</property>
+
+                <child>
+                    <object class="AdwHeaderBar"/>
+                </child>
+
+                <child>
+                    <object class="GtkBox">
+                        <style>
+                            <class name="card"/>
+                        </style>
+
+                        <property name="orientation">horizontal</property>
+                        <property name="margin-top">10</property>
+                        <property name="margin-bottom">10</property>
+                        <property name="margin-start">10</property>
+                        <property name="margin-end">10</property>
+
+                        <child>
+                            <object class="GtkLabel">
+                                <property name="label">Delete Connection</property>
+                                <property name="margin-start">10</property>
+                            </object>
+                        </child>
+
+                        <child type="end">
+                            <object class="GtkButton">
+                                <style>
+                                    <class name="destructive-action"/>
+                                </style>
+
+                                <property name="icon-name">user-trash-symbolic</property>
+                                <signal name="clicked" handler="delete_clicked"/>
+                                <property name="margin-top">10</property>
+                                <property name="margin-bottom">10</property>
+                                <property name="margin-end">10</property>
+                            </object>
+                        </child>
+                    </object>
+                </child>
+            </object>
+        </child>
+    </template>
+</interface>

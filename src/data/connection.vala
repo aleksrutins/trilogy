@@ -1,3 +1,5 @@
+using Trilogy.Util;
+
 namespace Trilogy.Data {
     public class Connection : Object, Json.Serializable {
         public static Gee.HashMap<string, Adapter> connections = new Gee.HashMap<string, Adapter>();
@@ -41,7 +43,7 @@ namespace Trilogy.Data {
         }
 
         public unowned ParamSpec? find_property(string prop) {
-            if(prop == "name" || prop == "url") return Tlg.Reflect.find_type_property(typeof(Connection), prop);
+            if(prop == "name" || prop == "url") return ((ObjectClass)(typeof(Connection).class_ref())).find_property(prop);
             else return null;
         }
 
