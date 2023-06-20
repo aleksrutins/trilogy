@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=trilogy
-Exec=com.rutins.Trilogy
+Exec=trilogy
 Icon=com.rutins.Trilogy
 Terminal=false
 Type=Application

@@ -3,7 +3,10 @@
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "44",
     "sdk" : "org.gnome.Sdk",
-    "command" : "com.rutins.Trilogy",
+    "sdk-extensions" : [
+        "org.freedesktop.Sdk.Extension.vala"
+    ],
+    "command" : "trilogy",
     "finish-args" : [
         "--share=network",
         "--share=ipc",
@@ -11,6 +14,10 @@
         "--device=dri",
         "--socket=wayland"
     ],
+    "build-options" : {
+        "append-path" : "/usr/lib/sdk/vala/bin",
+        "prepend-ld-library-path" : "/usr/lib/sdk/vala/lib"
+    },
     "cleanup" : [
         "/include",
         "/lib/pkgconfig",
@@ -19,22 +26,12 @@
         "/share/gtk-doc",
         "/share/man",
         "/share/pkgconfig",
+        "/share/vala",
         "*.la",
         "*.a"
     ],
     "modules" : [
-        {
-            "name": "blueprint-compiler",
-            "buildsystem": "meson",
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler",
-                    "tag": "v0.8.1"
-                }
-            ]
-        },
-        {
+    	{
             "name": "postgres",
             "buildsystem": "simple",
             "no-make-install": true,
@@ -61,7 +58,7 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/aleksrutins/kaste",
-                    "tag": "v0.1.1"
+                    "tag": "v0.2.0"
                 }
 	    ]
 	},
@@ -82,8 +79,7 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://github.com/aleksrutins/trilogy.git",
-                    "tag": "v0.1.0"
+                    "url" : "file:///var/home/aleks/Projects"
                 }
             ]
         }

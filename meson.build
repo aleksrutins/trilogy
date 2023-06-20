@@ -7,11 +7,9 @@ project('trilogy', ['c', 'vala'],
 i18n = import('i18n')
 gnome = import('gnome')
 
-dependency('kaste-0.1')
-dependency('spectrum-0.1')
+
 
 subdir('data')
-subdir('libtlg')
 subdir('src')
 subdir('po')
 

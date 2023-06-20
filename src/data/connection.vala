@@ -1,6 +1,4 @@
-using Tlg;
-
-namespace Tlg {
+namespace Trilogy.Data {
     public class Connection : Object, Json.Serializable {
         public static Gee.HashMap<string, Adapter> connections = new Gee.HashMap<string, Adapter>();
         public Adapter? db {

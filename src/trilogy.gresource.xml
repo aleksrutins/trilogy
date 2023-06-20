@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/rutins/Trilogy">
-    <!-- UI definitions -->
     <file preprocess="xml-stripblanks">window.ui</file>
-    <file preprocess="xml-stripblanks">connection-preview.ui</file>
-    <file preprocess="xml-stripblanks">connection-view.ui</file>
-    <file preprocess="xml-stripblanks">add-connection-dialog.ui</file>
-    <file preprocess="xml-stripblanks">connection-settings.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
-
-    <!-- Styles -->
-    <file>app.css</file>
-
-    <!-- Icons -->
-    <file preprocess="xml-stripblanks">icons/scalable/actions/plus-large-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">icons/scalable/actions/circle-filled-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">icons/scalable/actions/about-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">icons/scalable/actions/settings-symbolic.svg</file>
   </gresource>
 </gresources>
